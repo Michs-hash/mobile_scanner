@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -273,6 +274,19 @@ class MethodChannelMobileScanner extends MobileScannerPlatform {
   @override
   Future<void> setZoomScale(double zoomScale) async {
     await methodChannel.invokeMethod<void>('setScale', zoomScale);
+  }
+
+  @override
+  Future<void> setFocusPoint(Offset position) async {
+    final Map<String, dynamic> params = <String, dynamic>{
+      'dx': position.dx,
+      'dy': position.dy,
+    };
+    if (Platform.isIOS) {
+      await methodChannel.invokeMethod<void>('setFocus', params);
+    } else {
+      throw UnimplementedError('setFocusPoint() has not been implemented.');
+    }
   }
 
   @override

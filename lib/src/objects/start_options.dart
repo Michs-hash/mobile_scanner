@@ -17,6 +17,8 @@ class StartOptions {
     required this.torchEnabled,
     required this.invertImage,
     required this.autoZoom,
+    required this.initialZoom,
+    required this.useUltraWide,
   });
 
   /// The direction for the camera.
@@ -51,6 +53,18 @@ class StartOptions {
   /// option.
   final bool autoZoom;
 
+  /// If set this sets the zoom scale factor when the camera launches
+  /// this avoids having to add a callback to modify the zoom to start at
+  /// a specific position
+  ///
+  /// Only support on iOS
+  final double initialZoom;
+
+  /// Whether we should default to the ultra-wide camera if available
+  ///
+  /// Only supported on iOS.
+  final bool useUltraWide;
+
   /// Converts this object to a map.
   Map<String, Object?> toMap() {
     return <String, Object?>{
@@ -68,6 +82,8 @@ class StartOptions {
       'torch': torchEnabled,
       'invertImage': invertImage,
       'autoZoom': autoZoom,
+      'initialZoom': initialZoom,
+      'useUltraWide': useUltraWide,
     };
   }
 }
