@@ -349,7 +349,6 @@ public class MobileScannerPlugin: NSObject, FlutterPlugin, FlutterStreamHandler,
         let speed:Int = argReader.int(key: "speed") ?? 0
         let timeoutMs:Int = argReader.int(key: "timeout") ?? 0
         let initialZoom: CGFloat = CGFloat(argReader.float(key: "initialZoom") ?? 1)
-        let useUltraWide:Bool = argReader.bool(key: "useUltraWide") ?? false
         symbologies = argReader.toSymbology()
         MobileScannerPlugin.returnImage = argReader.bool(key: "returnImage") ?? false
 
@@ -364,12 +363,17 @@ public class MobileScannerPlugin: NSObject, FlutterPlugin, FlutterStreamHandler,
 #endif
         
         // Open the camera device
+#if os(iOS)
         if #available(iOS 13.0, *) {
-            let type: AVCaptureDevice.DeviceType = useUltraWide ? .builtInUltraWideCamera : .builtInWideAngleCamera
-            device = AVCaptureDevice.DiscoverySession(deviceTypes: [type], mediaType: .video, position: position).devices.first
-        } else if #available(macOS 10.15, *) {
+            device = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInTripleCamera, .builtInDualCamera, .builtInWideAngleCamera], mediaType: .video, position: position).devices.first
+        }
+#else
+        if #available(macOS 10.15, *) {
             device = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: position).devices.first
-        } else {
+        }
+#endif
+        
+        if (device == nil) {
             device = AVCaptureDevice.devices(for: .video).filter({$0.position == position}).first
         }
         

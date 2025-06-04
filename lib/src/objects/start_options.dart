@@ -18,7 +18,6 @@ class StartOptions {
     required this.invertImage,
     required this.autoZoom,
     required this.initialZoom,
-    required this.useUltraWide,
   });
 
   /// The direction for the camera.
@@ -60,11 +59,6 @@ class StartOptions {
   /// Only support on iOS
   final double initialZoom;
 
-  /// Whether we should default to the ultra-wide camera if available
-  ///
-  /// Only supported on iOS.
-  final bool useUltraWide;
-
   /// Converts this object to a map.
   Map<String, Object?> toMap() {
     return <String, Object?>{
@@ -83,7 +77,6 @@ class StartOptions {
       'invertImage': invertImage,
       'autoZoom': autoZoom,
       'initialZoom': initialZoom,
-      'useUltraWide': useUltraWide,
     };
   }
 }

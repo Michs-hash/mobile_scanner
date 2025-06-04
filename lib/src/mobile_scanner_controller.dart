@@ -35,7 +35,6 @@ class MobileScannerController extends ValueNotifier<MobileScannerState> {
     this.invertImage = false,
     this.autoZoom = false,
     this.initialZoom = 0,
-    this.useUltraWide = false,
   }) : detectionTimeoutMs =
            detectionSpeed == DetectionSpeed.normal ? detectionTimeoutMs : 0,
        assert(
@@ -121,11 +120,6 @@ class MobileScannerController extends ValueNotifier<MobileScannerState> {
   ///
   /// Only support on iOS
   final double initialZoom;
-
-  /// Whether we should default to the ultra-wide camera if available
-  ///
-  /// Only supported on iOS.
-  final bool useUltraWide;
 
   /// The internal barcode controller, that listens for detected barcodes.
   final StreamController<BarcodeCapture> _barcodesController =
@@ -444,7 +438,6 @@ class MobileScannerController extends ValueNotifier<MobileScannerState> {
       invertImage: invertImage,
       autoZoom: autoZoom,
       initialZoom: initialZoom,
-      useUltraWide: useUltraWide,
     );
 
     try {
