@@ -26,6 +26,7 @@ class MobileScanner extends StatefulWidget {
     this.scanWindow,
     this.scanWindowUpdateThreshold = 0.0,
     this.useAppLifecycleState = true,
+    this.tapToFocus = false,
     super.key,
   });
 
@@ -135,6 +136,16 @@ class MobileScanner extends StatefulWidget {
   ///
   /// Defaults to true.
   final bool useAppLifecycleState;
+
+  /// Enables or disables tap-to-focus functionality on the camera preview.
+  ///
+  /// When set to `true`, the camera will adjust focus automatically when the
+  /// user taps on a specific point in the preview view. This feature helps
+  /// achieve better focus on subjects selected by the user. When `false`, tap
+  /// gestures are ignored, and the camera remains in continuous autofocus mode.
+  ///
+  /// Defaults to false.
+  final bool tapToFocus;
 
   @override
   State<MobileScanner> createState() => _MobileScannerState();
@@ -253,9 +264,20 @@ class _MobileScannerState extends State<MobileScanner>
               return scannerWidget;
             }
 
-            return Stack(
-              alignment: Alignment.center,
-              children: <Widget>[scannerWidget, overlay],
+            return GestureDetector(
+              onTapUp: (details) {
+                final Size size = MediaQuery.of(context).size;
+                final double relativeX =
+                    details.globalPosition.dx / size.width;
+                final double relativeY =
+                    details.globalPosition.dy / size.height;
+
+                controller.setFocusPoint(Offset(relativeX, relativeY));
+              },
+              child: Stack(
+                alignment: Alignment.center,
+                children: <Widget>[scannerWidget, overlay],
+              ),
             );
           },
         );
