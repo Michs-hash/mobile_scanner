@@ -24,7 +24,7 @@ struct MobileScannerErrorCodes {
     static let GENERIC_ERROR_MESSAGE = "An unknown error occurred."
     // This message is used with the 'GENERIC_ERROR' error code.
     static let INVALID_ZOOM_SCALE_ERROR_MESSAGE = "The zoom scale should be between 0 and 1 (both inclusive)"
-    static let INVALID_FOCUS_POINT = "The focus needs both X and Y coordinates between 0 and 1."
+    static let INVALID_FOCUS_POINT = "The focus needs both X and Y coordinates to be between 0 and 1."
     static let NO_CAMERA_ERROR = "MOBILE_SCANNER_NO_CAMERA_ERROR"
     static let NO_CAMERA_ERROR_MESSAGE = "No cameras available."
     static let SET_SCALE_WHEN_STOPPED_ERROR = "MOBILE_SCANNER_SET_SCALE_WHEN_STOPPED_ERROR"
