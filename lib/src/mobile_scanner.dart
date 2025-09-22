@@ -252,7 +252,17 @@ class _MobileScannerState extends State<MobileScanner>
               constraints,
             );
 
-            final Widget scannerWidget = GestureDetector(
+            final Widget scannerWidget = ClipRect(
+              child: SizedBox.fromSize(
+                size: constraints.biggest,
+                child: FittedBox(
+                  fit: widget.fit,
+                  child: CameraPreview(controller),
+                ),
+              ),
+            );
+
+            final Widget tapToFocusScannerWidget = GestureDetector(
               onTapUp: (details) {
                 final Size size = MediaQuery.sizeOf(context);
                 final double relativeX = details.globalPosition.dx / size.width;
@@ -261,24 +271,25 @@ class _MobileScannerState extends State<MobileScanner>
 
                 controller.setFocusPoint(Offset(relativeX, relativeY));
               },
-              child: ClipRect(
-                child: SizedBox.fromSize(
-                  size: constraints.biggest,
-                  child: FittedBox(
-                    fit: widget.fit,
-                    child: CameraPreview(controller),
-                  ),
-                ),
-              ),
+              child: scannerWidget,
             );
 
             if (overlay == null) {
+              if (widget.tapToFocus) {
+                return tapToFocusScannerWidget;
+              }
               return scannerWidget;
             }
 
             return Stack(
               alignment: Alignment.center,
-              children: <Widget>[scannerWidget, IgnorePointer(child: overlay)],
+              children: <Widget>[
+                if (widget.tapToFocus)
+                  tapToFocusScannerWidget
+                else
+                  scannerWidget,
+                IgnorePointer(child: overlay),
+              ],
             );
           },
         );
