@@ -277,15 +277,15 @@ class MethodChannelMobileScanner extends MobileScannerPlatform {
 
   @override
   Future<void> setFocusPoint(Offset position) async {
-    final Map<String, Object?> params = <String, Object?>{
-      'dx': position.dx,
-      'dy': position.dy,
-    };
-
     if (defaultTargetPlatform != TargetPlatform.iOS &&
         defaultTargetPlatform != TargetPlatform.android) {
       throw UnimplementedError('setFocusPoint() has not been implemented.');
     }
+
+    final Map<String, Object?> params = <String, Object?>{
+      'dx': position.dx,
+      'dy': position.dy,
+    };
 
     await methodChannel.invokeMethod<void>('setFocus', params);
   }
