@@ -113,7 +113,9 @@ class MobileScannerController extends ValueNotifier<MobileScannerState> {
   /// Only supported on Android.
   final bool autoZoom;
 
-  /// If set this sets the zoom scale factor when the camera launches
+  /// The initial zoom scale for the camera.
+  ///
+  /// Defaults to no initial zoom and is only supported on iOS, MacOS and Android.
   /// this avoids having to add a callback to modify the zoom to start at
   /// a specific position
   ///
