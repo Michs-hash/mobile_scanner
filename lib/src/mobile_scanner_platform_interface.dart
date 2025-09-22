@@ -86,7 +86,7 @@ abstract class MobileScannerPlatform extends PlatformInterface {
   /// Set the focus position for the camera.
   ///
   /// Pass a position in x, y coordinates where top left is (0,0) and
-  /// bottom right is (1,1). The focus is only currently supported on iOS
+  /// bottom right is (1,1).
   Future<void> setFocusPoint(Offset position) {
     throw UnimplementedError('setFocusPoint() has not been implemented.');
   }

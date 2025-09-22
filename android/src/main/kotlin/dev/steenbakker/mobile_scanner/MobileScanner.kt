@@ -10,6 +10,7 @@ import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.Rect
 import android.hardware.display.DisplayManager
+import android.icu.util.TimeUnit
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
@@ -23,9 +24,13 @@ import androidx.camera.core.CameraSelector
 import androidx.camera.core.CameraXConfig
 import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ExperimentalLensFacing
+import androidx.camera.core.FocusMeteringAction
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
+import androidx.camera.core.MeteringPoint
+import androidx.camera.core.MeteringPointFactory
 import androidx.camera.core.Preview
+import androidx.camera.core.SurfaceOrientedMeteringPointFactory
 import androidx.camera.core.SurfaceRequest
 import androidx.camera.core.TorchState
 import androidx.camera.core.resolutionselector.ResolutionSelector
@@ -699,6 +704,24 @@ class MobileScanner(
     fun resetScale() {
         if (camera == null) throw ZoomWhenStopped()
         camera?.cameraControl?.setZoomRatio(1f)
+    }
+
+    fun setFocus(x: Float, y: Float) {
+        val cam = camera ?: throw ZoomWhenStopped()
+
+        // Ensure x,y are normalized (0f..1f)
+        if (x !in 0f..1f || y !in 0f..1f) {
+            throw IllegalArgumentException("Focus coordinates must be between 0.0 and 1.0")
+        }
+
+        val factory: MeteringPointFactory = SurfaceOrientedMeteringPointFactory(1f, 1f)
+        val afPoint: MeteringPoint = factory.createPoint(x, y)
+
+        val action = FocusMeteringAction.Builder(afPoint, FocusMeteringAction.FLAG_AF)
+//            .setAutoCancelDuration(3, TimeUnit.SECONDS) // optional
+            .build()
+
+        cam.cameraControl.startFocusAndMetering(action)
     }
 
     /**
