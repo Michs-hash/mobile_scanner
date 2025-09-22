@@ -117,7 +117,7 @@ class MobileScannerController extends ValueNotifier<MobileScannerState> {
   /// this avoids having to add a callback to modify the zoom to start at
   /// a specific position
   ///
-  /// Only support on iOS
+  /// Only support on iOS, macOS & Android.
   final double initialZoom;
 
   /// The internal barcode controller, that listens for detected barcodes.
