@@ -311,7 +311,8 @@ class _MobileScannerAdvancedState extends State<MobileScannerAdvanced> {
                     fit: boxFit,
                   ),
                   if (useBarcodeOverlay)
-                    IgnorePointer( // Needed for tapToFocus
+                    // Needed for tapToFocus
+                    IgnorePointer(
                       child: BarcodeOverlay(
                         controller: controller!,
                         boxFit: boxFit,
@@ -319,14 +320,16 @@ class _MobileScannerAdvancedState extends State<MobileScannerAdvanced> {
                     ),
                   // The scanWindow is not supported on the web.
                   if (useScanWindow)
-                    IgnorePointer( // Needed for tapToFocus
+                    // Needed for tapToFocus
+                    IgnorePointer(
                       child: ScanWindowOverlay(
                         scanWindow: scanWindow,
                         controller: controller!,
                       ),
                     ),
                   if (returnImage)
-                    IgnorePointer( // Needed for tapToFocus
+                    // Needed for tapToFocus
+                    IgnorePointer(
                       child: Align(
                         alignment: Alignment.topRight,
                         child: Card(
