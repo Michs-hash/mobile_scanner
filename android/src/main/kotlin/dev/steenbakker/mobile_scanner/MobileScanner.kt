@@ -10,7 +10,6 @@ import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.Rect
 import android.hardware.display.DisplayManager
-import android.icu.util.TimeUnit
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
@@ -731,7 +730,6 @@ class MobileScanner(
         val afPoint: MeteringPoint = factory.createPoint(x, y)
 
         val action = FocusMeteringAction.Builder(afPoint, FocusMeteringAction.FLAG_AF)
-//            .setAutoCancelDuration(3, TimeUnit.SECONDS) // optional
             .build()
 
         cam.cameraControl.startFocusAndMetering(action)
