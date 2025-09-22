@@ -282,12 +282,13 @@ class MethodChannelMobileScanner extends MobileScannerPlatform {
       'dx': position.dx,
       'dy': position.dy,
     };
-    if (defaultTargetPlatform == TargetPlatform.iOS ||
-        defaultTargetPlatform == TargetPlatform.android) {
-      await methodChannel.invokeMethod<void>('setFocus', params);
-    } else {
+
+    if (defaultTargetPlatform != TargetPlatform.iOS &&
+        defaultTargetPlatform != TargetPlatform.android) {
       throw UnimplementedError('setFocusPoint() has not been implemented.');
     }
+
+    await methodChannel.invokeMethod<void>('setFocus', params);
   }
 
   @override
