@@ -85,11 +85,8 @@ abstract class MobileScannerPlatform extends PlatformInterface {
 
   /// Set the focus position for the camera.
   ///
-  /// The provided point should be in the range `(0,0) - (1,1)`, where `(0,0)`
-  /// is the top left and `(1,1)` is the bottom right.
-  ///
-  /// Pass a position in x, y coordinates where top left is (0,0) and
-  /// bottom right is (1,1).
+  /// The provided point should be in the range `(0,0) - (1,1)`, both inclusive,
+  /// where `(0,0)` is the top left and `(1,1)` is the bottom right.
   Future<void> setFocusPoint(Offset position) {
     throw UnimplementedError('setFocusPoint() has not been implemented.');
   }
