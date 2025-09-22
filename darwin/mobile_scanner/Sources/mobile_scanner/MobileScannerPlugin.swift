@@ -612,9 +612,9 @@ public class MobileScannerPlugin: NSObject, FlutterPlugin, FlutterStreamHandler,
         guard let args = call.arguments as? [String: Any],
                   let dx = args["dx"] as? CGFloat,
                   let dy = args["dy"] as? CGFloat else {
-                result(FlutterError(code: MobileScannerErrorCodes.GENERIC_ERROR,
-                                    message: MobileScannerErrorCodes.INVALID_FOCUS_POINT,
-                                    details: "The focus coordinates are not valid."))
+                result(FlutterError(code: MobileScannerErrorCodes.INVALID_FOCUS_POINT,
+                                    message: MobileScannerErrorCodes.INVALID_FOCUS_POINT_MESSAGE,
+                                    details: nil))
                 return
             }
             let focusPoint = CGPoint(x: dx, y: dy)
@@ -645,8 +645,6 @@ public class MobileScannerPlugin: NSObject, FlutterPlugin, FlutterStreamHandler,
         }
     }
 
-    
-    
 #if os(iOS)
     /// Set the device orientation if it differs from previous orientation
     func setDeviceOrientation(orientation: UIDeviceOrientation) {
