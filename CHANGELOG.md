@@ -1,3 +1,6 @@
+## 6.0.11
+* [Android] Update camerax dependencies to support 16KB pages sizes.
+
 ## 6.0.10
 * [Apple] Fixed a crash when stopping the camera when the camera device is nil.
 
