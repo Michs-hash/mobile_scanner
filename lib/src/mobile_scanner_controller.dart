@@ -134,10 +134,10 @@ class MobileScannerController extends ValueNotifier<MobileScannerState> {
   final Completer<void> _isAttachedCompleter = Completer<void>();
 
   void _disposeListeners() {
-    _barcodesSubscription?.cancel();
-    _torchStateSubscription?.cancel();
-    _zoomScaleSubscription?.cancel();
-    _deviceOrientationSubscription?.cancel();
+    unawaited(_barcodesSubscription?.cancel());
+    unawaited(_torchStateSubscription?.cancel());
+    unawaited(_zoomScaleSubscription?.cancel());
+    unawaited(_deviceOrientationSubscription?.cancel());
 
     _barcodesSubscription = null;
     _torchStateSubscription = null;
