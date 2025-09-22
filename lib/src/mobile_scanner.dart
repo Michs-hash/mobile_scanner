@@ -270,7 +270,8 @@ class _MobileScannerState extends State<MobileScanner>
                   child: scannerWidget,
                   onTapUp: (details) {
                     final Size size = MediaQuery.sizeOf(context);
-                    final double relativeX = details.globalPosition.dx / size.width;
+                    final double relativeX = 
+                      details.globalPosition.dx / size.width;
                     final double relativeY =
                       details.globalPosition.dy / size.height;
 
@@ -281,7 +282,11 @@ class _MobileScannerState extends State<MobileScanner>
             );
 
             if (overlay == null) {
-              return widget.tapToFocus ? tapToFocusScannerWidget : scannerWidget;
+              if (widget.tapToFocus) {
+                return tapToFocusScannerWidget;
+              }
+              
+              return scannerWidget;
             }
 
             return Stack(
