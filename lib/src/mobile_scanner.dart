@@ -254,7 +254,7 @@ class _MobileScannerState extends State<MobileScanner>
 
             final Widget scannerWidget = GestureDetector(
               onTapUp: (details) {
-                final Size size = MediaQuery.of(context).size;
+                final Size size = MediaQuery.sizeOf(context);
                 final double relativeX = details.globalPosition.dx / size.width;
                 final double relativeY =
                     details.globalPosition.dy / size.height;
