@@ -140,6 +140,15 @@ class MobileScanner extends StatefulWidget {
   /// Enables or disables tap-to-focus functionality on the camera preview.
   ///
   /// When set to `true`, the camera will adjust focus automatically when the
+  /// user taps on a specific point in the preview view.
+  /// When set to `false`, tap gestures are ignored, and the camera remains in continuous autofocus mode.
+  ///
+  /// If this is `true`, the preview (or part of it) should be able to receive gestures,
+  /// as other widgets overlaid over the preview will prevent it to receive gestures in those areas.
+  ///
+  /// Defaults to false and is only supported on iOS and Android.
+  ///
+  /// When set to `true`, the camera will adjust focus automatically when the
   /// user taps on a specific point in the preview view. This feature helps
   /// achieve better focus on subjects selected by the user. When `false`, tap
   /// gestures are ignored, and the camera remains in continuous autofocus mode.
