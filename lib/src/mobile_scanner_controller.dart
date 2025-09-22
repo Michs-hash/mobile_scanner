@@ -116,10 +116,7 @@ class MobileScannerController extends ValueNotifier<MobileScannerState> {
   /// The initial zoom scale for the camera.
   ///
   /// Defaults to no initial zoom and is only supported on iOS, MacOS and
-  /// Android. this avoids having to add a callback to modify the zoom to start
-  /// at a specific position
-  ///
-  /// Only support on iOS, macOS & Android.
+  /// Android.
   final double initialZoom;
 
   /// The internal barcode controller, that listens for detected barcodes.
