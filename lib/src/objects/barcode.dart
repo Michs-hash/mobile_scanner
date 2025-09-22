@@ -121,6 +121,8 @@ class Barcode {
   /// the points do not necessarily form a rectangle.
   ///
   /// This list is empty if the corners can not be determined.
+  ///
+  /// See also [scaleCorners], to scale the corners to a different size.
   final List<Offset> corners;
 
   /// The barcode value in a user-friendly format.
@@ -192,4 +194,43 @@ class Barcode {
 
   /// The Wireless network information that is embedded in the barcode.
   final WiFi? wifi;
+
+  /// Scale the [corners] of this [Barcode] to the given [targetSize].
+  ///
+  /// Returns the list of scaled offsets,
+  /// or an empty list, if the [corners] is empty.
+  ///
+  /// This method can be used to scale the [corners] of a [Barcode]
+  /// from the original camera coordinate space, into widget coordinate space.
+  ///
+  /// For example, given the `BuildContext` of a widget:
+  ///
+  /// ```dart
+  /// final BuildContext context;
+  ///
+  /// final Barcode barcode = Barcode(
+  ///   size: Size(60, 60),
+  ///   corners: [
+  ///     Offset(10, 10),
+  ///     Offset(50, 10),
+  ///     Offset(50, 50),
+  ///     Offset(10, 50),
+  ///   ],
+  /// );
+  ///
+  /// final List<Offset> scaledCorners = barcode.scaleCorners(
+  ///   context.size ?? Size.zero
+  /// );
+  /// ```
+  List<Offset> scaleCorners(Size targetSize) {
+    // The size and corners are in the same coordinate space,
+    // which is the camera input.
+    final double scaleX = targetSize.width / size.width;
+    final double scaleY = targetSize.height / size.height;
+
+    return [
+      for (final Offset offset in corners)
+        Offset(offset.dx * scaleX, offset.dy * scaleY),
+    ];
+  }
 }
