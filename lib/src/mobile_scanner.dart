@@ -146,7 +146,7 @@ class MobileScanner extends StatefulWidget {
   ///
   /// Only works if widget has no other widgets in front of it.
   ///
-  /// Defaults to false.
+  /// Defaults to false, currently only supported on iOS.
   final bool tapToFocus;
 
   @override
