@@ -70,4 +70,3 @@ class _BoxFitDialogState extends State<BoxFitDialog> {
     );
   }
 }
-
