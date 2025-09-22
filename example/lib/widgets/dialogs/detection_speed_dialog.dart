@@ -45,5 +45,3 @@ class DetectionSpeedDialog extends StatelessWidget {
     );
   }
 }
-
-
