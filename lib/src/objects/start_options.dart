@@ -55,10 +55,6 @@ class StartOptions {
   /// The initial zoom scale factor for the camera.
   ///
   /// Currently only supported on iOS and Android.
-  /// this avoids having to add a callback to modify the zoom to start at
-  /// a specific position
-  ///
-  /// Only support on iOS & Android
   final double initialZoom;
 
   /// Converts this object to a map.
