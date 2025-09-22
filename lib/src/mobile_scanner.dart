@@ -149,15 +149,6 @@ class MobileScanner extends StatefulWidget {
   /// receive gestures in those areas.
   ///
   /// Defaults to false and is only supported on iOS and Android.
-  ///
-  /// When set to `true`, the camera will adjust focus automatically when the
-  /// user taps on a specific point in the preview view. This feature helps
-  /// achieve better focus on subjects selected by the user. When `false`, tap
-  /// gestures are ignored, and the camera remains in continuous autofocus mode.
-  ///
-  /// Only works if widget has no other widgets in front of it.
-  ///
-  /// Defaults to false, only supported on iOS & Android.
   final bool tapToFocus;
 
   @override
@@ -273,23 +264,24 @@ class _MobileScannerState extends State<MobileScanner>
               ),
             );
 
-            final Widget tapToFocusScannerWidget = GestureDetector(
-              onTapUp: (details) {
-                final Size size = MediaQuery.sizeOf(context);
-                final double relativeX = details.globalPosition.dx / size.width;
-                final double relativeY =
-                    details.globalPosition.dy / size.height;
+            final Widget tapToFocusScannerWidget = Builder(
+              builder: (context) {
+                return GestureDetector(
+                  child: scannerWidget,
+                  onTapUp: (details) {
+                    final Size size = MediaQuery.sizeOf(context);
+                    final double relativeX = details.globalPosition.dx / size.width;
+                    final double relativeY =
+                      details.globalPosition.dy / size.height;
 
-                controller.setFocusPoint(Offset(relativeX, relativeY));
-              },
-              child: scannerWidget,
+                    controller.setFocusPoint(Offset(relativeX, relativeY));
+                  }
+                );
+              }
             );
 
             if (overlay == null) {
-              if (widget.tapToFocus) {
-                return tapToFocusScannerWidget;
-              }
-              return scannerWidget;
+              return widget.tapToFocus ? tapToFocusScannerWidget : scannerWidget;
             }
 
             return Stack(
