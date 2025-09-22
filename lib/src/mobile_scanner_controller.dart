@@ -328,7 +328,7 @@ class MobileScannerController extends ValueNotifier<MobileScannerState> {
 
   /// Set the focus point for the camera.
   ///
-  /// The [position] must be between an offset with X, Y coordinates.
+  /// The [position] must be a point between `0,0` and `1,1`, both inclusive.
   ///
   /// Does nothing if the camera is not running.
   Future<void> setFocusPoint(Offset position) async {
