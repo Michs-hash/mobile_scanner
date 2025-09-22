@@ -338,7 +338,6 @@ class MobileScannerController extends ValueNotifier<MobileScannerState> {
       return;
     }
 
-    // Clamp coordinates to make sure they are between 1 and 0
     final Offset clampedPosition = Offset(
       position.dx.clamp(0, 1),
       position.dy.clamp(0, 1),
