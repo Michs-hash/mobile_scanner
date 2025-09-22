@@ -225,8 +225,9 @@ class Barcode {
   List<Offset> scaleCorners(Size targetSize) {
     // The size and corners are in the same coordinate space,
     // which is the camera input.
-    final double scaleX = targetSize.width / size.width;
-    final double scaleY = targetSize.height / size.height;
+    // If the barcode size is unknown, scale to 0,0.
+    final double scaleX = size.width > 0 ? targetSize.width / size.width : 0;
+    final double scaleY = size.height > 0 ? targetSize.height / size.height : 0;
 
     return [
       for (final Offset offset in corners)
