@@ -311,60 +311,69 @@ class _MobileScannerAdvancedState extends State<MobileScannerAdvanced> {
                     fit: boxFit,
                   ),
                   if (useBarcodeOverlay)
-                    BarcodeOverlay(controller: controller!, boxFit: boxFit),
+                    IgnorePointer( // Needed for tapToFocus
+                      child: BarcodeOverlay(
+                        controller: controller!,
+                        boxFit: boxFit,
+                      ),
+                    ),
                   // The scanWindow is not supported on the web.
                   if (useScanWindow)
-                    ScanWindowOverlay(
-                      scanWindow: scanWindow,
-                      controller: controller!,
+                    IgnorePointer( // Needed for tapToFocus
+                      child: ScanWindowOverlay(
+                        scanWindow: scanWindow,
+                        controller: controller!,
+                      ),
                     ),
                   if (returnImage)
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: Card(
-                        clipBehavior: Clip.hardEdge,
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: SizedBox(
-                          width: 100,
-                          height: 100,
-                          child: StreamBuilder<BarcodeCapture>(
-                            stream: controller!.barcodes,
-                            builder: (context, snapshot) {
-                              final BarcodeCapture? barcode = snapshot.data;
+                    IgnorePointer( // Needed for tapToFocus
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: Card(
+                          clipBehavior: Clip.hardEdge,
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: SizedBox(
+                            width: 100,
+                            height: 100,
+                            child: StreamBuilder<BarcodeCapture>(
+                              stream: controller!.barcodes,
+                              builder: (context, snapshot) {
+                                final BarcodeCapture? barcode = snapshot.data;
 
-                              if (barcode == null) {
-                                return const Center(
-                                  child: Text(
-                                    'Your scanned barcode will appear here',
-                                    textAlign: TextAlign.center,
-                                  ),
-                                );
-                              }
-
-                              final Uint8List? barcodeImage = barcode.image;
-
-                              if (barcodeImage == null) {
-                                return const Center(
-                                  child: Text('No image for this barcode.'),
-                                );
-                              }
-
-                              return Image.memory(
-                                barcodeImage,
-                                fit: BoxFit.cover,
-                                gaplessPlayback: true,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return Center(
+                                if (barcode == null) {
+                                  return const Center(
                                     child: Text(
-                                      'Could not decode image bytes. $error',
+                                      'Your scanned barcode will appear here',
+                                      textAlign: TextAlign.center,
                                     ),
                                   );
-                                },
-                              );
-                            },
+                                }
+
+                                final Uint8List? barcodeImage = barcode.image;
+
+                                if (barcodeImage == null) {
+                                  return const Center(
+                                    child: Text('No image for this barcode.'),
+                                  );
+                                }
+
+                                return Image.memory(
+                                  barcodeImage,
+                                  fit: BoxFit.cover,
+                                  gaplessPlayback: true,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Center(
+                                      child: Text(
+                                        'Could not decode image bytes. $error',
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
                           ),
                         ),
                       ),
@@ -383,8 +392,7 @@ class _MobileScannerAdvancedState extends State<MobileScannerAdvanced> {
                               barcodes: controller!.barcodes,
                             ),
                           ),
-                          if (!kIsWeb)
-                            ZoomScaleSlider(controller: controller!),
+                          if (!kIsWeb) ZoomScaleSlider(controller: controller!),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [

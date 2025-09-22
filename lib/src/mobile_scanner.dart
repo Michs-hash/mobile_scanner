@@ -144,6 +144,8 @@ class MobileScanner extends StatefulWidget {
   /// achieve better focus on subjects selected by the user. When `false`, tap
   /// gestures are ignored, and the camera remains in continuous autofocus mode.
   ///
+  /// Only works if widget has no other widgets in front of it.
+  ///
   /// Defaults to false.
   final bool tapToFocus;
 
@@ -250,12 +252,22 @@ class _MobileScannerState extends State<MobileScanner>
               constraints,
             );
 
-            final Widget scannerWidget = ClipRect(
-              child: SizedBox.fromSize(
-                size: constraints.biggest,
-                child: FittedBox(
-                  fit: widget.fit,
-                  child: CameraPreview(controller),
+            final Widget scannerWidget = GestureDetector(
+              onTapUp: (details) {
+                final Size size = MediaQuery.of(context).size;
+                final double relativeX = details.globalPosition.dx / size.width;
+                final double relativeY =
+                    details.globalPosition.dy / size.height;
+
+                controller.setFocusPoint(Offset(relativeX, relativeY));
+              },
+              child: ClipRect(
+                child: SizedBox.fromSize(
+                  size: constraints.biggest,
+                  child: FittedBox(
+                    fit: widget.fit,
+                    child: CameraPreview(controller),
+                  ),
                 ),
               ),
             );
@@ -264,20 +276,9 @@ class _MobileScannerState extends State<MobileScanner>
               return scannerWidget;
             }
 
-            return GestureDetector(
-              onTapUp: (details) {
-                final Size size = MediaQuery.of(context).size;
-                final double relativeX =
-                    details.globalPosition.dx / size.width;
-                final double relativeY =
-                    details.globalPosition.dy / size.height;
-
-                controller.setFocusPoint(Offset(relativeX, relativeY));
-              },
-              child: Stack(
-                alignment: Alignment.center,
-                children: <Widget>[scannerWidget, overlay],
-              ),
+            return Stack(
+              alignment: Alignment.center,
+              children: <Widget>[scannerWidget, IgnorePointer(child: overlay)],
             );
           },
         );
