@@ -277,7 +277,7 @@ class MethodChannelMobileScanner extends MobileScannerPlatform {
 
   @override
   Future<void> setFocusPoint(Offset position) async {
-    final Map<String, dynamic> params = <String, dynamic>{
+    final Map<String, Object?> params = <String, Object?>{
       'dx': position.dx,
       'dy': position.dy,
     };
