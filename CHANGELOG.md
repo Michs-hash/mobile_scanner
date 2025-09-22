@@ -1,3 +1,7 @@
+## 7.0.2
+
+* Added a `Barcode.scaleCorners()` method.
+
 ## 7.0.1
 
 * Added error handling for when `MobileScannerController.start` is called without an active `MobileScanner` widget.
