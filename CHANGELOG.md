@@ -1,3 +1,8 @@
+## NEXT
+
+* [Android] Update to Java 17, and update other dependencies.
+* [iOS] Upgraded minimum iOS level to 13 due to Flutter requirements.
+
 ## 7.0.1
 
 * Added error handling for when `MobileScannerController.start` is called without an active `MobileScanner` widget.
