@@ -1,3 +1,6 @@
+/// @docImport 'package:mobile_scanner/src/objects/barcode_capture.dart';
+library;
+
 import 'dart:typed_data';
 import 'dart:ui';
 
@@ -106,7 +109,7 @@ class Barcode {
   /// The contact information that is embedded in the barcode.
   final ContactInfo? contactInfo;
 
-  /// The corner points of the barcode.
+  /// The corner points of the barcode, relative to the [size] of the barcode.
   ///
   /// On Android, iOS and MacOS, this is a list of four points,
   /// in clockwise direction, starting with the top left.
@@ -162,7 +165,8 @@ class Barcode {
   /// This is null if the raw value is not available.
   final String? rawValue;
 
-  /// The normalized size of the barcode bounding box.
+  /// The normalized size of the barcode bounding box,
+  /// relative to the [BarcodeCapture.size] of the original barcode capture.
   ///
   /// If the bounding box is unavailable, this will be [Size.zero].
   final Size size;
