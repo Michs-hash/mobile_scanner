@@ -52,7 +52,9 @@ class StartOptions {
   /// option.
   final bool autoZoom;
 
-  /// If set this sets the zoom scale factor when the camera launches
+  /// The initial zoom scale factor for the camera.
+  ///
+  /// Currently only supported on iOS and Android.
   /// this avoids having to add a callback to modify the zoom to start at
   /// a specific position
   ///
