@@ -201,6 +201,9 @@ Known issues:
 * [Apple] The scan window does not work correctly.
 * [Apple] The camera flash briefly shows when the camera is started.
 
+## 6.0.11
+* [Android] Update camerax dependencies to support 16KB pages sizes.
+
 ## 6.0.10
 * [Apple] Fixed a crash when stopping the camera when the camera device is nil.
 
