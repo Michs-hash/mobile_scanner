@@ -2,7 +2,8 @@
 
 **BREAKING CHANGES**
 
-* [iOS] Increased minimum iOS level to 13 due to Flutter requirements.
+* [iOS] Increased minimum os level to 13 due to Flutter requirements.
+* [macOS] Increased minimum os level to 10.15 due to Flutter requirements.
 
 **Highlights**
 
