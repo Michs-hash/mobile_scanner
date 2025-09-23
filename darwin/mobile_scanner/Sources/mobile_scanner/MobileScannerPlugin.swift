@@ -429,7 +429,7 @@ public class MobileScannerPlugin: NSObject, FlutterPlugin, FlutterStreamHandler,
                 message: error.localizedDescription, details: nil))
             return
         }
-        captureSession!.sessionPreset = AVCaptureSession.Preset.photo
+        captureSession!.sessionPreset = AVCaptureSession.Preset.high
 
         // Add video output
         let videoOutput = AVCaptureVideoDataOutput()
