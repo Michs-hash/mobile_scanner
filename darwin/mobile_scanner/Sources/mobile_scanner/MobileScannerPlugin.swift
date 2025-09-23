@@ -159,11 +159,12 @@ public class MobileScannerPlugin: NSObject, FlutterPlugin, FlutterStreamHandler,
             nextScanTime = currentTime + timeoutSeconds
             imagesCurrentlyBeingProcessed = true
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                if self!.latestBuffer == nil {
+                guard let self = self else { return }
+                if self.latestBuffer == nil {
                     return
                 }
                 var cgImage: CGImage?
-                VTCreateCGImageFromCVPixelBuffer(self!.latestBuffer, options: nil, imageOut: &cgImage)
+                VTCreateCGImageFromCVPixelBuffer(self.latestBuffer, options: nil, imageOut: &cgImage)
                 let imageRequestHandler = VNImageRequestHandler(cgImage: cgImage!)
                 do {
                     let barcodeRequest: VNDetectBarcodesRequest = VNDetectBarcodesRequest(completionHandler: { [weak self] (request, error) in
