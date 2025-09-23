@@ -268,24 +268,26 @@ class _MobileScannerState extends State<MobileScanner>
               builder: (context) {
                 return GestureDetector(
                   child: scannerWidget,
-                  onTapUp: (details) {
+                  onTapUp: (details) async {
                     final Size size = MediaQuery.sizeOf(context);
-                    final double relativeX = 
-                      details.globalPosition.dx / size.width;
+                    final double relativeX =
+                        details.globalPosition.dx / size.width;
                     final double relativeY =
-                      details.globalPosition.dy / size.height;
+                        details.globalPosition.dy / size.height;
 
-                    controller.setFocusPoint(Offset(relativeX, relativeY));
-                  }
+                    await controller.setFocusPoint(
+                      Offset(relativeX, relativeY),
+                    );
+                  },
                 );
-              }
+              },
             );
 
             if (overlay == null) {
               if (widget.tapToFocus) {
                 return tapToFocusScannerWidget;
               }
-              
+
               return scannerWidget;
             }
 
