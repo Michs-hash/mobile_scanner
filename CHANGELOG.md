@@ -1,7 +1,18 @@
 ## NEXT
 
+**BREAKING CHANGES**
+
+* [iOS] Increased minimum iOS level to 13 due to Flutter requirements.
+
+**Highlights**
+
+* [Apple & Android] Added tap to focus functionality. You can enable it in the `MobileScanner` widget.
+* [Apple & Android] You can now set the initial zoom factor using the `initialZoom` parameter in the `startOptions`.
+
+**Bug Fixes and Improvements**
+
 * [Android] Update to Java 17, and update other dependencies.
-* [iOS] Upgraded minimum iOS level to 13 due to Flutter requirements.
+* [Apple] Improved fallback for when camera is not found.
 
 ## 7.0.1
 
@@ -11,7 +22,7 @@
 
 This version finalizes all changes from the beta and release candidate cycles and introduces major improvements, bug fixes, and breaking changes.
 
-**BREAKING CHANGES:**
+**BREAKING CHANGES**
 
 * Requires Flutter 3.29.0 or higher.
 * The initial camera facing direction in `MobileScannerState` is now `CameraFacing.unknown`.
