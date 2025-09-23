@@ -13,6 +13,7 @@
 
 * [Android] Update to Java 17, and update other dependencies.
 * [Apple] Improved fallback for when camera is not found.
+* Added a `Barcode.scaleCorners()` method.
 
 ## 7.0.1
 
