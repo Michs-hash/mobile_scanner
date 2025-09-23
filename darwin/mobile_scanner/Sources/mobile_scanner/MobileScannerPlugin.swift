@@ -217,20 +217,20 @@ public class MobileScannerPlugin: NSObject, FlutterPlugin, FlutterStreamHandler,
                         }
                     })
 
-                    if self?.symbologies.isEmpty == false {
+                    if self.symbologies.isEmpty == false {
                         // Add the symbologies the user wishes to support.
-                        barcodeRequest.symbologies = self!.symbologies
+                        barcodeRequest.symbologies = self.symbologies
                     }
 
                     // Set the region of interest to match scanWindow
-                    if let scanWindow = self?.scanWindow {
+                    if let scanWindow = self.scanWindow {
                         barcodeRequest.regionOfInterest = scanWindow
                     }
 
                     try imageRequestHandler.perform([barcodeRequest])
                 } catch let error {
                     DispatchQueue.main.async {
-                        self?.sink?(FlutterError(
+                        self.sink?(FlutterError(
                             code: MobileScannerErrorCodes.BARCODE_ERROR,
                             message: error.localizedDescription, details: nil))
                     }
