@@ -1,9 +1,4 @@
-## NEXT
-
-**BREAKING CHANGES**
-
-* [iOS] Increased minimum os level to 13 due to Flutter requirements.
-* [macOS] Increased minimum os level to 10.15 due to Flutter requirements.
+## 7.1.0
 
 **Highlights**
 
@@ -12,6 +7,8 @@
 
 **Bug Fixes and Improvements**
 
+* [iOS] Increased minimum os level to 13 due to Flutter requirements.
+* [macOS] Increased minimum os level to 10.15 due to Flutter requirements.
 * [Android] Update to Java 17, and update other dependencies.
 * [Apple] Improved fallback for when camera is not found.
 * Added a `Barcode.scaleCorners()` method.
